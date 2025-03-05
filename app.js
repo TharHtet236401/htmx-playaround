@@ -22,10 +22,15 @@ app.get('/books', (req, res) => {
 });
 
 app.post('/books', (req, res) => {
-  const {title, author} = req.body;
-  const newBook = {id: Math.random().toString(), title, author};
-  BOOKS_DATA.push(newBook);
-  res.redirect(`/books/${newBook.id}`);
+  try {
+    const {title, author} = req.body;
+    const newBook = {id: Math.random().toString(), title, author};
+    BOOKS_DATA.push(newBook);
+    res.send(createBookTemplate(newBook));
+  } catch (error) {
+    console.error('Error adding new book:', error);
+    res.status(500).send('Error adding new book');
+  }
 });
 
 app.get('/books/:id', (req, res) => {
