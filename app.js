@@ -53,6 +53,16 @@ app.get('/books/edit/:id', (req, res) => {
   res.send(createEditFormTemplate(book));
 });
 
+app.put('/books/:id', (req, res) => {
+  const {id} = req.params;
+  const {title, author} = req.body;
+  console.log(title, author);
+  const book = BOOKS_DATA.find(book => book.id === id);
+  book.title = title;
+  book.author = author;
+  res.send(createBookTemplate(book));
+});
+
 // listen to port
 app.listen(3000, () => {
   console.log('App listening on port 3000');
