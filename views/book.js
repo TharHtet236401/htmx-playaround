@@ -5,11 +5,11 @@ const createBookTemplate = (book) => {
         <h3>${book.title}</h3>
         <p>${book.author}</p>
      </div>
-    
-        <button>delete</button>
-
+        <button hx-delete="/books/${book.id}" hx-target="closest li" hx-swap="outerHTML">delete</button>
+     </div>
   </li>
 `;
 };
 
 export default createBookTemplate;
+

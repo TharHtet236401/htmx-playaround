@@ -38,6 +38,14 @@ app.get('/books/:id', (req, res) => {
   const book = BOOKS_DATA.find(book => book.id === id);
   res.send(createBookTemplate(book));
 });
+
+app.delete('/books/:id', (req, res) => {
+  const {id} = req.params;
+  const idx = BOOKS_DATA.findIndex(book => book.id === id);
+  BOOKS_DATA.splice(idx, 1);
+  res.send()
+});
+
 // listen to port
 app.listen(3000, () => {
   console.log('App listening on port 3000');
